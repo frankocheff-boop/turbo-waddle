@@ -1,0 +1,622 @@
+ < !DOCTYPE html><html lang="es" class="scroll-smooth"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Épicure | Chef Franko Salgado</title>< !-- Fuentes de Lujo --><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,400&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">< !-- Iconos --><script src="https://unpkg.com/lucide@latest"></script><style> :root {
+     /* Paleta Dark Luxury */
+     --bg-deep: #050505;
+     --bg-card: rgba(30, 30, 30, 0.4);
+     --bg-card-hover: rgba(40, 40, 40, 0.6);
+     --border-glass: rgba(255, 255, 255, 0.1);
+
+     /* Acentos */
+     --carmin: #960018;
+     /* Rojo elegante */
+     --gold: #D4AF37;
+     /* Dorado sutil para textos */
+     --neon: #00f2ff;
+     /* Turquesa eléctrico */
+
+     /* Textos */
+     --text-main: #e0e0e0;
+     --text-muted: #a0a0a0;
+ }
+
+ /* --- BASE & ANIMACIONES --- */
+ body {
+     margin: 0;
+     background-color: var(--bg-deep);
+     color: var(--text-main);
+     font-family: 'Montserrat', sans-serif;
+     overflow-x: hidden;
+ }
+
+ h1,
+ h2,
+ h3,
+ .serif {
+     font-family: 'Cormorant Garamond', serif;
+ }
+
+ /* Animación de entrada al hacer scroll */
+ .reveal {
+     opacity: 0;
+     transform: translateY(30px);
+     transition: all 0.8s ease-out;
+ }
+
+ .reveal.active {
+     opacity: 1;
+     transform: translateY(0);
+ }
+
+ /* --- HERO SECTION (Portada) --- */
+ .hero {
+     height: 100vh;
+     width: 100%;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
+     position: relative;
+     background: radial-gradient(circle at center, #1a0505 0%, #000000 100%);
+     overflow: hidden;
+ }
+
+ .hero::before {
+     content: "";
+     position: absolute;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+     pointer-events: none;
+ }
+
+ .hero-content {
+     z-index: 2;
+     text-align: center;
+     padding: 20px;
+ }
+
+ .hero-subtitle {
+     font-size: 1.2rem;
+     letter-spacing: 0.3em;
+     text-transform: uppercase;
+     color: var(--neon);
+     margin-bottom: 20px;
+     display: block;
+     text-shadow: 0 0 10px rgba(0, 242, 255, 0.4);
+ }
+
+ .hero-title {
+     font-size: clamp(4rem, 10vw, 8rem);
+     font-weight: 300;
+     line-height: 0.9;
+     margin: 0;
+     background: linear-gradient(to bottom, #fff, #aaa);
+     -webkit-background-clip: text;
+     -webkit-text-fill-color: transparent;
+     position: relative;
+ }
+
+ .hero-title span {
+     font-style: italic;
+     color: var(--carmin);
+     -webkit-text-fill-color: var(--carmin);
+ }
+
+ .hero-scroll {
+     position: absolute;
+     bottom: 40px;
+     animation: bounce 2s infinite;
+     opacity: 0.7;
+ }
+
+ @keyframes bounce {
+
+     0%,
+     20%,
+     50%,
+     80%,
+     100% {
+         transform: translateY(0);
+     }
+
+     40% {
+         transform: translateY(-10px);
+     }
+
+     60% {
+         transform: translateY(-5px);
+     }
+ }
+
+ /* --- NAVEGACIÓN FLOTANTE --- */
+ .nav-sticky {
+     position: sticky;
+     top: 20px;
+     z-index: 100;
+     display: flex;
+     justify-content: center;
+     padding: 0 20px;
+     margin-bottom: 40px;
+ }
+
+ .nav-container {
+     background: rgba(20, 20, 20, 0.8);
+     backdrop-filter: blur(12px);
+     -webkit-backdrop-filter: blur(12px);
+     border: 1px solid var(--border-glass);
+     border-radius: 50px;
+     padding: 10px 30px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+     display: flex;
+     gap: 20px;
+     flex-wrap: wrap;
+     justify-content: center;
+ }
+
+ .nav-link {
+     color: var(--text-main);
+     text-decoration: none;
+     font-size: 0.9rem;
+     text-transform: uppercase;
+     letter-spacing: 1px;
+     transition: all 0.3s;
+     position: relative;
+     padding: 5px 0;
+ }
+
+ .nav-link::after {
+     content: '';
+     position: absolute;
+     width: 0;
+     height: 1px;
+     bottom: 0;
+     left: 0;
+     background-color: var(--neon);
+     transition: width 0.3s;
+     box-shadow: 0 0 8px var(--neon);
+ }
+
+ .nav-link:hover {
+     color: var(--neon);
+ }
+
+ .nav-link:hover::after {
+     width: 100%;
+ }
+
+ /* --- SECCIONES Y GRID --- */
+ .section-container {
+     max-width: 1200px;
+     margin: 0 auto;
+     padding: 60px 20px;
+ }
+
+ .section-header {
+     text-align: center;
+     margin-bottom: 60px;
+ }
+
+ .section-title {
+     font-size: 3rem;
+     margin-bottom: 10px;
+     color: var(--carmin);
+ }
+
+ .section-desc {
+     font-family: 'Montserrat', sans-serif;
+     font-weight: 300;
+     font-size: 1.1rem;
+     max-width: 600px;
+     margin: 0 auto;
+     color: var(--text-muted);
+ }
+
+ .grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+     gap: 30px;
+ }
+
+ /* --- TARJETAS PREMIUM --- */
+ .dish-card {
+     background: var(--bg-card);
+     border: 1px solid var(--border-glass);
+     border-radius: 16px;
+     overflow: hidden;
+     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+     position: relative;
+     group: isolate;
+ }
+
+ .dish-card:hover {
+     transform: translateY(-10px);
+     background: var(--bg-card-hover);
+     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+     border-color: rgba(150, 0, 24, 0.4);
+ }
+
+ .card-image-wrapper {
+     height: 250px;
+     overflow: hidden;
+     position: relative;
+ }
+
+ .card-image-wrapper img {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     transition: transform 0.6s ease;
+     filter: brightness(0.9);
+ }
+
+ .dish-card:hover img {
+     transform: scale(1.1);
+     filter: brightness(1);
+ }
+
+ .card-content {
+     padding: 25px;
+     position: relative;
+ }
+
+ .card-content::before {
+     content: '';
+     position: absolute;
+     top: 0;
+     left: 50%;
+     transform: translateX(-50%);
+     width: 40px;
+     height: 2px;
+     background: var(--neon);
+     box-shadow: 0 0 10px var(--neon);
+     transition: width 0.3s ease;
+ }
+
+ .dish-card:hover .card-content::before {
+     width: 80%;
+ }
+
+ .dish-title {
+     font-size: 1.8rem;
+     margin: 10px 0;
+     color: #fff;
+     line-height: 1.1;
+ }
+
+ .dish-tech {
+     font-size: 0.75rem;
+     text-transform: uppercase;
+     letter-spacing: 1.5px;
+     color: var(--gold);
+     margin-bottom: 15px;
+     display: block;
+ }
+
+ .dish-desc {
+     font-size: 0.95rem;
+     color: #ccc;
+     line-height: 1.6;
+     margin-bottom: 20px;
+     font-weight: 300;
+ }
+
+ .pairing {
+     font-size: 0.85rem;
+     color: var(--text-muted);
+     border-top: 1px solid var(--border-glass);
+     padding-top: 15px;
+     font-style: italic;
+     display: flex;
+     align-items: center;
+     gap: 8px;
+ }
+
+ .pairing svg {
+     color: var(--carmin);
+ }
+
+ /* --- BOTONES DE CONTROL FLOTANTE --- */
+ .controls-wrapper {
+     position: fixed;
+     bottom: 30px;
+     right: 30px;
+     display: flex;
+     flex-direction: column;
+     gap: 15px;
+     z-index: 999;
+ }
+
+ .control-group {
+     background: rgba(0, 0, 0, 0.8);
+     backdrop-filter: blur(10px);
+     border: 1px solid var(--border-glass);
+     padding: 10px;
+     border-radius: 12px;
+     display: flex;
+     flex-direction: column;
+     gap: 5px;
+     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+ }
+
+ .btn-action {
+     background: transparent;
+     color: white;
+     border: none;
+     padding: 8px 12px;
+     cursor: pointer;
+     font-family: 'Montserrat', sans-serif;
+     font-size: 0.8rem;
+     border-radius: 6px;
+     transition: all 0.2s;
+     text-align: right;
+ }
+
+ .btn-action:hover,
+ .btn-action.active {
+     background: var(--carmin);
+     color: white;
+ }
+
+ .btn-pdf {
+     background: var(--neon);
+     color: #000;
+     font-weight: 700;
+     text-align: center;
+ }
+
+ .btn-pdf:hover {
+     background: #fff;
+     box-shadow: 0 0 15px var(--neon);
+ }
+
+ /* --- FOOTER --- */
+ footer {
+     background: #000;
+     padding: 80px 20px;
+     margin-top: 100px;
+     border-top: 1px solid var(--border-glass);
+     text-align: center;
+ }
+
+ .footer-logo {
+     font-family: 'Cormorant Garamond', serif;
+     font-size: 2.5rem;
+     color: var(--carmin);
+     margin-bottom: 20px;
+ }
+
+ .footer-contact {
+     max-width: 600px;
+     margin: 0 auto;
+ }
+
+ .contact-form {
+     display: grid;
+     gap: 15px;
+     margin-top: 30px;
+ }
+
+ .form-input {
+     width: 100%;
+     background: rgba(255, 255, 255, 0.05);
+     border: 1px solid var(--border-glass);
+     padding: 15px;
+     color: white;
+     font-family: 'Montserrat', sans-serif;
+     border-radius: 4px;
+ }
+
+ .form-input:focus {
+     outline: none;
+     border-color: var(--neon);
+     background: rgba(255, 255, 255, 0.1);
+ }
+
+ .btn-submit {
+     background: var(--carmin);
+     color: white;
+     border: none;
+     padding: 15px;
+     font-family: 'Montserrat', sans-serif;
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     cursor: pointer;
+     transition: all 0.3s;
+ }
+
+ .btn-submit:hover {
+     background: var(--neon);
+     color: black;
+     box-shadow: 0 0 20px var(--neon);
+ }
+
+ /* --- IMPRESIÓN --- */
+ @media print {
+     body {
+         background: white;
+         color: black;
+     }
+
+     .hero,
+     .nav-sticky,
+     .controls-wrapper,
+     .hero::before {
+         display: none !important;
+     }
+
+     .section-container {
+         padding: 20px 0;
+     }
+
+     .dish-card {
+         break-inside: avoid;
+         border: 1px solid #ddd;
+         background: white;
+         box-shadow: none;
+         margin-bottom: 20px;
+         color: black;
+     }
+
+     .dish-title {
+         color: black;
+     }
+
+     .dish-tech,
+     .pairing {
+         color: #555;
+     }
+
+     .dish-desc {
+         color: black;
+     }
+
+     .card-content::before {
+         background: black;
+         box-shadow: none;
+     }
+
+     .card-image-wrapper {
+         height: 150px;
+         filter: grayscale(100%);
+     }
+
+     footer {
+         background: white;
+         color: black;
+         border-top: 2px solid black;
+     }
+
+     .btn-submit,
+     .form-input {
+         display: none;
+     }
+ }
+
+ /* Responsive */
+ @media (max-width: 768px) {
+     .hero-title {
+         font-size: 3.5rem;
+     }
+
+     .nav-container {
+         border-radius: 12px;
+         padding: 15px;
+     }
+
+     .controls-wrapper {
+         bottom: 10px;
+         right: 10px;
+         transform: scale(0.9);
+     }
+ }
+
+ </style></head><body>< !-- CONTROLADORES --><div class="controls-wrapper"><div class="control-group"><button class="btn-action active" onclick="setLang('es')">ES 🇪🇸</button><button class="btn-action" onclick="setLang('en')">EN 🇺🇸</button><button class="btn-action" onclick="setLang('fr')">FR 🇫🇷</button></div><div class="control-group"><button class="btn-action btn-pdf" onclick="window.print()"><i data-lucide="printer"></i>PDF / Print </button><a href="index.html" class="btn-action" style="text-align:center; margin-top:5px;">⬅ CV</a></div></div>< !-- PORTADA --><header class="hero"><div class="hero-content reveal active"><span class="hero-subtitle" data-i18n="hero_sub">Alta Cocina de Vanguardia</span><h1 class="hero-title">ÉPI<span>CURE</span></h1><p style="margin-top:20px; font-weight:300; letter-spacing:1px; color:#ccc;">Chef Franko Salgado</p></div><div class="hero-scroll"><i data-lucide="chevron-down" size="48" color="white"></i></div></header>< !-- NAVEGACIÓN --><div class="nav-sticky"><nav class="nav-container"><a href="#amuse" class="nav-link">Amuse</a><a href="#entradas" class="nav-link" data-i18n="nav_starters">Entradas</a><a href="#mar" class="nav-link" data-i18n="nav_sea">Mar</a><a href="#tierra" class="nav-link" data-i18n="nav_land">Tierra</a><a href="#postres" class="nav-link" data-i18n="nav_dessert">Postres</a><a href="#contacto" class="nav-link" data-i18n="nav_contact">Reservas</a></nav></div>< !-- SECCIÓN AMUSE-BOUCHE --><section id="amuse" class="section-container"><div class="section-header reveal"><h2 class="section-title">Amuse-bouche</h2><p class="section-desc" data-i18n="desc_amuse">Un inicio lúdico y elegante para despertar el paladar,
+ con técnica molecular.</p></div><div class="grid">< !-- FOTO 1: Esfera de Mezcal --><article class="dish-card reveal"><div class="card-image-wrapper">< !-- Referencia directa a tu archivo --><img src="soprbet de maracuya.jpg" alt="Esfera Mezcal (Sorbet)" onerror="this.src='https://placehold.co/600x400/111/EEE?text=Falta+Imagen';"></div><div class="card-content"><span class="dish-tech">Esferificación Inversa • Humo</span><h3 class="dish-title" data-i18n="dish1_title">Esfera de Mezcal</h3><p class="dish-desc" data-i18n="dish1_desc">Explosión cítrica con notas ahumadas de mezcal,
+ sal de gusano y microgreens para un final vibrante.</p><div class="pairing"><i data-lucide="wine"></i><span data-i18n="dish1_pair">Sal de gusano,
+ aire de lima.</span></div></div></article>< !-- FOTO 2: Macaron --><article class="dish-card reveal"><div class="card-image-wrapper">< !-- Referencia directa a tu archivo --><img src="macarron de foiegrass.jpg" alt="Macaron Foie" onerror="this.src='https://placehold.co/600x400/111/EEE?text=Falta+Imagen';"></div><div class="card-content"><span class="dish-tech">Emulsión • Montaje</span><h3 class="dish-title" data-i18n="dish2_title">Macaron de Foie Gras</h3><p class="dish-desc" data-i18n="dish2_desc">Crujiente sutil con centro sedoso de foie,
+ contraste frutal del oporto y un guiño floral.</p><div class="pairing"><i data-lucide="wine"></i><span data-i18n="dish2_pair">Sauternes joven.</span></div></div></article></div></section>< !-- SECCIÓN MAR --><section id="mar" class="section-container"><div class="section-header reveal"><h2 class="section-title" data-i18n="title_sea">Fuertes de Mar</h2><p class="section-desc" data-i18n="desc_sea">La frescura del océano con técnicas precisas y contraste térmico.</p></div><div class="grid">< !-- FOTO 3: Ravioli --><article class="dish-card reveal"><div class="card-image-wrapper">< !-- Referencia directa a tu archivo --><img src="ravioly.jpg" alt="Ravioli Langosta" onerror="this.src='https://placehold.co/600x400/001a1a/FFF?text=Falta+Imagen';"></div><div class="card-content"><span class="dish-tech">Tapioca • Espuma Coral</span><h3 class="dish-title" data-i18n="dish3_title">Ravioli Transparente</h3><p class="dish-desc" data-i18n="dish3_desc">Delicadeza marina con ligereza aérea y perfume de azafrán,
+ servido en vajilla minimalista.</p><div class="pairing"><i data-lucide="wine"></i><span data-i18n="dish3_pair">Champagne Blanc de Blancs.</span></div></div></article>< !-- FOTO 4: Pesca --><article class="dish-card reveal"><div class="card-image-wrapper">< !-- Referencia directa a tu archivo --><img src="httpsimgur.comauCqo8Lp (2).jpg" alt="Pesca Blanca" onerror="this.src='https://placehold.co/600x400/001a1a/FFF?text=Falta+Imagen';"></div><div class="card-content"><span class="dish-tech">Sellado • Emulsión Verde</span><h3 class="dish-title" data-i18n="dish4_title">Pesca del Día & Risotto</h3><p class="dish-desc" data-i18n="dish4_desc">Filete de carne perlada sobre risotto herbáceo,
+ crocante vegetal y matiz cítrico.</p><div class="pairing"><i data-lucide="wine"></i><span data-i18n="dish4_pair">Albariño Rías Baixas.</span></div></div></article></div></section>< !-- SECCIÓN TIERRA (Sin fotos, usando Placeholders Elegantes) --><section id="tierra" class="section-container"><div class="section-header reveal"><h2 class="section-title" data-i18n="title_land">Fuertes de Tierra</h2><p class="section-desc" data-i18n="desc_land">Profundidad Umami,
+ glasés brillantes y texturas robustas.</p></div><div class="grid"><article class="dish-card reveal"><div class="card-image-wrapper"><img src="https://placehold.co/600x400/220000/FFF?text=Wagyu+A5" alt="Wagyu A5"></div><div class="card-content"><span class="dish-tech">Maillard • Glaseado</span><h3 class="dish-title">Wagyu A5 & Miso</h3><p class="dish-desc" data-i18n="dish5_desc">Carne marmoleada de textura mantequilla,
+ miso caramelizado y crujiente de yuca.</p><div class="pairing"><i data-lucide="wine"></i><span data-i18n="dish5_pair">Pinot Noir Borgoña.</span></div></div></article><article class="dish-card reveal"><div class="card-image-wrapper"><img src="https://placehold.co/600x400/220000/FFF?text=Pato+Laqueado" alt="Pato"></div><div class="card-content"><span class="dish-tech">Laqueado • Esferificación</span><h3 class="dish-title" data-i18n="dish6_title">Pato Agave & Tamarindo</h3><p class="dish-desc" data-i18n="dish6_desc">Crujiente de piel y centro jugoso,
+ salsa agridulce profunda y granos perfumados.</p><div class="pairing"><i data-lucide="wine"></i><span data-i18n="dish6_pair">Syrah del Ródano.</span></div></div></article></div></section>< !-- SECCIÓN POSTRES --><section id="postres" class="section-container"><div class="section-header reveal"><h2 class="section-title" data-i18n="nav_dessert">Postres</h2><p class="section-desc">Finales dulces con un toque de sofisticación.</p></div><div class="grid">< !-- FOTO 5: Burrata / Esfera (Recuerda convertir a JPG) --><article class="dish-card reveal"><div class="card-image-wrapper">< !-- Referencia a tu archivo (CONVERTIDO A JPG) --><img src="IMG_6937.jpg" alt="Burrata o Esfera" onerror="this.src='https://placehold.co/600x400/111/EEE?text=Convertir+HEIC+a+JPG';"></div><div class="card-content"><span class="dish-tech">Frescura • Lácteo</span><h3 class="dish-title">Burrata & Remolacha</h3><p class="dish-desc">Textura cremosa de burrata fresca con láminas de remolacha y toques de pimienta rosa.</p><div class="pairing"><i data-lucide="wine"></i><span>Sauvignon Blanc.</span></div></div></article></div></section>< !-- FOOTER / CONTACTO --><footer id="contacto"><div class="footer-logo">Franko Salgado</div><p style="color:var(--text-muted);">Puerto Vallarta • Riviera Nayarit</p><div class="footer-contact"><h3 style="color:white; margin-top:30px;" data-i18n="contact_header">Reserva tu Experiencia</h3><form action="https://formspree.io/f/mvgqblyn" method="POST" class="contact-form"><input type="email" name="email" class="form-input" placeholder="Email" required><textarea name="message" class="form-input" rows="3" placeholder="Mensaje / Message" required></textarea><button type="submit" class="btn-submit" data-i18n="btn_send">Enviar Solicitud</button></form><div style="margin-top:30px; font-size:1.2rem;"><a href="tel:+523221606843" style="color:var(--neon); text-decoration:none;">+52 322 160 6843</a></div></div><p style="margin-top:50px; font-size:0.8rem; color:#444;">© 2025 Épicure Menu. Design by Franko Salgado.</p></footer>< !-- LOGICA JAVASCRIPT --><script> // Inicializar Iconos
+ lucide.createIcons();
+
+ // Animación Scroll
+ const observer=new IntersectionObserver((entries)=> {
+         entries.forEach(entry=> {
+                 if (entry.isIntersecting) {
+                     entry.target.classList.add('active');
+                 }
+             });
+     }
+
+     , {
+     threshold: 0.1
+ });
+
+ document.querySelectorAll('.reveal').forEach(el=> observer.observe(el));
+
+ // Traducciones
+ const translations= {
+     es: {
+         hero_sub: "Alta Cocina de Vanguardia",
+             nav_starters: "Entradas", nav_sea: "Mar", nav_land: "Tierra", nav_dessert: "Postres", nav_contact: "Reservas",
+             desc_amuse: "Un inicio lúdico y elegante para despertar el paladar, con técnica molecular.",
+             dish1_title: "Esfera de Mezcal", dish1_desc: "Explosión cítrica con notas ahumadas de mezcal, sal de gusano y microgreens.",
+             dish1_pair: "Sal de gusano, aire de lima.",
+             dish2_title: "Macaron de Foie Gras", dish2_desc: "Crujiente sutil con centro sedoso de foie, contraste frutal.",
+             dish2_pair: "Sauternes joven.",
+             title_sea: "Fuertes de Mar", desc_sea: "La frescura del océano con técnicas precisas.",
+             dish3_title: "Ravioli Transparente", dish3_desc: "Delicadeza marina con ligereza aérea y perfume de azafrán.",
+             dish3_pair: "Champagne Blanc de Blancs.",
+             dish4_title: "Pesca del Día & Risotto", dish4_desc: "Filete perlado sobre risotto herbáceo y crocante vegetal.",
+             dish4_pair: "Albariño Rías Baixas.",
+             title_land: "Fuertes de Tierra", desc_land: "Profundidad Umami y texturas robustas.",
+             dish5_desc: "Carne marmoleada de textura mantequilla, miso caramelizado y crujiente de yuca.",
+             dish5_pair: "Pinot Noir Borgoña.",
+             dish6_title: "Pato Agave & Tamarindo", dish6_desc: "Crujiente de piel y centro jugoso, salsa agridulce.",
+             dish6_pair: "Syrah del Ródano.",
+             contact_header: "Reserva tu Experiencia", btn_send: "Enviar Solicitud"
+     }
+
+     ,
+     en: {
+         hero_sub: "Avant-Garde Haute Cuisine",
+             nav_starters: "Starters", nav_sea: "Sea", nav_land: "Land", nav_dessert: "Dessert", nav_contact: "Book",
+             desc_amuse: "A playful and elegant start to awaken the palate with molecular technique.",
+             dish1_title: "Mezcal Sphere", dish1_desc: "Citrus explosion with smoky mezcal notes, worm salt, and microgreens.",
+             dish1_pair: "Worm salt, lime air.",
+             dish2_title: "Foie Gras Macaron", dish2_desc: "Subtle crunch with silky foie center, fruity contrast.",
+             dish2_pair: "Young Sauternes.",
+             title_sea: "Sea Mains", desc_sea: "Ocean freshness with precise techniques.",
+             dish3_title: "Transparent Ravioli", dish3_desc: "Marine delicacy with airy lightness and saffron perfume.",
+             dish3_pair: "Blanc de Blancs Champagne.",
+             dish4_title: "Catch of the Day & Risotto", dish4_desc: "Pearly fillet on herbaceous risotto and vegetable crunch.",
+             dish4_pair: "Rías Baixas Albariño.",
+             title_land: "Land Mains", desc_land: "Umami depth and robust textures.",
+             dish5_desc: "Butter-textured marbled meat, caramelized miso, and yucca crunch.",
+             dish5_pair: "Burgundy Pinot Noir.",
+             dish6_title: "Agave & Tamarind Duck", dish6_desc: "Crispy skin and juicy center, deep bittersweet sauce.",
+             dish6_pair: "Rhône Syrah.",
+             contact_header: "Book Your Experience", btn_send: "Send Request"
+     }
+
+     ,
+     fr: {
+         hero_sub: "Haute Cuisine d'Avant-Garde",
+             nav_starters: "Entrées", nav_sea: "Mer", nav_land: "Terre", nav_dessert: "Desserts", nav_contact: "Réserver",
+             desc_amuse: "Un début ludique et élégant pour éveiller le palais avec la technique moléculaire.",
+             dish1_title: "Sphère de Mezcal", dish1_desc: "Explosion d'agrumes aux notes fumées de mezcal.",
+             dish1_pair: "Sel de ver, air de citron vert.",
+             dish2_title: "Macaron au Foie Gras", dish2_desc: "Croquant subtil avec centre soyeux de foie, contraste fruité.",
+             dish2_pair: "Sauternes jeune.",
+             title_sea: "Plats de la Mer", desc_sea: "Fraîcheur de l'océan avec des techniques précises.",
+             dish3_title: "Ravioli Transparent", dish3_desc: "Délicatesse marine avec légèreté aérienne et parfum de safran.",
+             dish3_pair: "Champagne Blanc de Blancs.",
+             dish4_title: "Pêche du Jour & Risotto", dish4_desc: "Filet perlé sur risotto herbacé et croquant végétal.",
+             dish4_pair: "Albariño Rías Baixas.",
+             title_land: "Plats de la Terre", desc_land: "Profondeur Umami et textures robustes.",
+             dish5_desc: "Viande marbrée texture beurre, miso caramélisé et croquant de manioc.",
+             dish5_pair: "Pinot Noir Bourgogne.",
+             dish6_title: "Canard Agave & Tamarin", dish6_desc: "Peau croustillante et centre juteux, sauce aigre-douce.",
+             dish6_pair: "Syrah du Rhône.",
+             contact_header: "Réservez votre Expérience", btn_send: "Envoyer Demande"
+     }
+ }
+
+ ;
+
+ function setLang(lang) {
+     document.querySelectorAll('[data-i18n]').forEach(el=> {
+             const key=el.getAttribute('data-i18n');
+             if (translations[lang][key]) el.innerText=translations[lang][key];
+         });
+
+     // Highlight active button
+     document.querySelectorAll('.btn-action').forEach(btn=> btn.classList.remove('active'));
+     event.target.classList.add('active');
+ }
+
+ </script></body></html>
